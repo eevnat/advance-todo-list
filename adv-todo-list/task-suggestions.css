@@ -1,0 +1,83 @@
+/* Task Suggestions Styles */
+.task-suggestions {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.suggestions-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.suggestions-header i {
+    color: #ffc107;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.suggestions-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+}
+
+.suggestions-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.suggestions-list li {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #555;
+}
+
+.suggestions-list li:last-child {
+    border-bottom: none;
+}
+
+.add-suggestion-btn {
+    background-color: #4a6cf7;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-suggestion-btn:hover {
+    background-color: #3a5bd9;
+}
+
+.add-suggestion-btn i {
+    font-size: 12px;
+}
+
+/* Dark Mode Support */
+.dark-mode .task-suggestions {
+    background-color: #1e2235;
+}
+
+.dark-mode .suggestions-header h3 {
+    color: #eee;
+}
+
+.dark-mode .suggestions-list li {
+    color: #ddd;
+    border-bottom-color: #333;
+}

@@ -1,0 +1,110 @@
+/* Weather Widget Styles */
+.weather-widget {
+    background: linear-gradient(to right, #4a6cf7, #3a5bd9);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.weather-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.weather-header h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.weather-current {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather-current img {
+    width: 48px;
+    height: 48px;
+}
+
+.weather-current .temp {
+    font-size: 24px;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.weather-condition {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.weather-details {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.weather-detail-item {
+    display: flex;
+    align-items: center;
+}
+
+.weather-detail-item i {
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+.weather-forecast {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+}
+
+.forecast-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48%;
+}
+
+.forecast-date {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.forecast-day img {
+    width: 36px;
+    height: 36px;
+}
+
+.forecast-temp {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.weather-error {
+    text-align: center;
+    padding: 15px 0;
+}
+
+.weather-error i {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.weather-error p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Dark Mode Support */
+.dark-mode .weather-widget {
+    background: linear-gradient(to right, #3a5bd9, #2a4bc9);
+}

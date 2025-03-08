@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoIt - Advanced Todo App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="notifications-dnd.css">
+    <link rel="stylesheet" href="auth-styles.css">
+    <link rel="stylesheet" href="task-suggestions.css">
+    <link rel="stylesheet" href="weather-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="light-mode">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <i class="fas fa-check-circle logo-icon"></i>
+                    <h1>DoIt</h1>
+                </div>
+            </div>
+
+            <div class="user-profile">
+                <div class="avatar">
+                    <img src="male.jpg" alt="User Avatar">
+                </div>
+                <p class="user-greeting" id="userGreeting">Hey, Guest</p>
+                <button id="signupBtn" class="signup-btn">Sign Up</button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <i class="fas fa-list-ul"></i>
+                        <span>All Tasks</span>
+                    </li>
+                    <li class="nav-item active">
+                        <i class="far fa-calendar-alt"></i>
+                        <span>Today</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="far fa-star"></i>
+                        <span>Important</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-calendar-week"></i>
+                        <span>Planned</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-user-check"></i>
+                        <span>Assigned to me</span>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="add-list-btn">
+                <button>
+                    <i class="fas fa-plus"></i>
+                    <span>Add list</span>
+                </button>
+            </div>
+
+            <div class="today-stats">
+                <div class="today-header">
+                    <span>Today Tasks</span>
+                    <span class="info-icon"><i class="fas fa-info-circle"></i></span>
+                </div>
+                <div class="task-count">11</div>
+                <div class="progress-chart">
+                    <div class="chart-container">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            <path class="circle-done"
+                                stroke-dasharray="30, 100"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            <path class="circle-pending"
+                                stroke-dasharray="70, 100"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                        </svg>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="dot pending-dot"></span>
+                            <span>Pending</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="dot done-dot"></span>
+                            <span>Done</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="dropdown">
+                    <button class="dropdown-toggle">To Do <i class="fas fa-chevron-down"></i></button>
+                </div>
+                <div class="header-actions">
+                    <button class="action-btn search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="action-btn layout-btn">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button class="action-btn theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Add Task Section -->
+            <section class="add-task-section">
+                <h2>Add A Task</h2>
+                <div class="task-input-row">
+                    <div class="task-input-actions">
+                        <button class="task-action-btn">
+                            <i class="far fa-bell"></i>
+                        </button>
+                        <button class="task-action-btn">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                        <button class="task-action-btn">
+                            <i class="far fa-calendar"></i>
+                        </button>
+                    </div>
+                    <div class="task-input-container">
+                        <input type="text" id="taskInput" placeholder="Add a task">
+                        <button class="add-task-btn">ADD TASK</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tasks Lists -->
+            <section class="tasks-container">
+                <!-- Pending Tasks -->
+                <div class="task-list" id="pendingTasks">
+                    <div class="task-item">
+                        <div class="task-checkbox">
+                            <input type="checkbox" id="task1">
+                            <label for="task1"></label>
+                        </div>
+                        <div class="task-text">Buy groceries</div>
+                        <button class="star-btn">
+                            <i class="far fa-star"></i>
+                        </button>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-checkbox">
+                            <input type="checkbox" id="task2">
+                            <label for="task2"></label>
+                        </div>
+                        <div class="task-text">Finish project report</div>
+                        <button class="star-btn important">
+                            <i class="fas fa-star"></i>
+                        </button>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-checkbox">
+                            <input type="checkbox" id="task3">
+                            <label for="task3"></label>
+                        </div>
+                        <div class="task-text">Call the bank</div>
+                        <button class="star-btn">
+                            <i class="far fa-star"></i>
+                        </button>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-checkbox">
+                            <input type="checkbox" id="task4">
+                            <label for="task4"></label>
+                        </div>
+                        <div class="task-text">Schedule dentist appointment</div>
+                        <button class="star-btn">
+                            <i class="far fa-star"></i>
+                        </button>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-checkbox">
+                            <input type="checkbox" id="task5">
+                            <label for="task5"></label>
+                        </div>
+                        <div class="task-text">Plan weekend trip</div>
+                        <button class="star-btn">
+                            <i class="far fa-star"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Completed Section -->
+                <div class="completed-section">
+                    <h3>Completed</h3>
+                    <div class="task-list" id="completedTasks">
+                        <div class="task-item completed">
+                            <div class="task-checkbox">
+                                <input type="checkbox" id="task6" checked>
+                                <label for="task6"></label>
+                            </div>
+                            <div class="task-text">Read a book</div>
+                            <button class="star-btn">
+                                <i class="far fa-star"></i>
+                            </button>
+                        </div>
+
+                        <div class="task-item completed">
+                            <div class="task-checkbox">
+                                <input type="checkbox" id="task7" checked>
+                                <label for="task7"></label>
+                            </div>
+                            <div class="task-text">Clean the house</div>
+                            <button class="star-btn">
+                                <i class="far fa-star"></i>
+                            </button>
+                        </div>
+
+                        <div class="task-item completed">
+                            <div class="task-checkbox">
+                                <input type="checkbox" id="task8" checked>
+                                <label for="task8"></label>
+                            </div>
+                            <div class="task-text">Prepare presentation</div>
+                            <button class="star-btn">
+                                <i class="far fa-star"></i>
+                            </button>
+                        </div>
+
+                        <div class="task-item completed">
+                            <div class="task-checkbox">
+                                <input type="checkbox" id="task9" checked>
+                                <label for="task9"></label>
+                            </div>
+                            <div class="task-text">Update blog</div>
+                            <button class="star-btn">
+                                <i class="far fa-star"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Auth Container (initially hidden) -->
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-container">
+            <button class="close-auth" id="closeAuth"><i class="fas fa-times"></i></button>
+            <div class="auth-logo">
+                <i class="fas fa-check-circle logo-icon"></i>
+                <h1>DoIt</h1>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="register">Register</button>
+            </div>
+            
+            <div class="auth-forms">
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form active" action="login_process.php" method="post">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                        <a href="reset_password.php" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="auth-button">Login</button>
+                    
+                    <div class="auth-divider">
+                        <span>OR</span>
+                    </div>
+                    
+                    <button type="button" class="google-auth-btn" id="googleLoginBtn">
+                        <i class="fab fa-google"></i> Sign in with Google
+                    </button>
+                    
+                    <div id="googleSignInWrapper" style="display: none;">
+                        <div id="g_id_onload"
+                            data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                            data-callback="handleGoogleLogin"
+                            data-auto_prompt="false">
+                        </div>
+                        <div class="g_id_signin"
+                            data-type="standard"
+                            data-size="large"
+                            data-theme="outline"
+                            data-text="sign_in_with"
+                            data-shape="rectangular"
+                            data-logo_alignment="center"
+                            data-width="100%">
+                        </div>
+                    </div>
+                </form>
+                
+                <!-- Register Form -->
+                <form id="registerForm" class="auth-form" action="register_process.php" method="post">
+                    <div class="form-group">
+                        <label for="registerName">Full Name</label>
+                        <input type="text" id="registerName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirm Password</label>
+                        <input type="password" id="registerConfirmPassword" name="confirm_password" required>
+                    </div>
+                    <button type="submit" class="auth-button">Register</button>
+                    
+                    <div class="auth-divider">
+                        <span>OR</span>
+                    </div>
+                    
+                    <button type="button" class="google-auth-btn" id="googleRegisterBtn">
+                        <i class="fab fa-google"></i> Sign up with Google
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Error display area -->
+            <div class="auth-error" id="authError">
+                <?php if(isset($_SESSION['error'])): ?>
+                <div class="error-message"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="weather.js"></script>
+    <script src="weather-tasks.js"></script>
+</body>
+</html>
